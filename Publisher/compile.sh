@@ -1,0 +1,1 @@
+gcc -Wall -Wextra -o CAR_Tick car_tick.c -lmosquitto

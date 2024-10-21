@@ -1,0 +1,1154 @@
+[
+    {
+        "id": "64f512d2aa19be79",
+        "type": "tab",
+        "label": "Flujo 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4bf232e35986f8b0",
+        "type": "mqtt in",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "topic": "RealTime/Speed",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "b77a72169d07fb3e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 900,
+        "y": 120,
+        "wires": [
+            [
+                "ec2d5ab5af868ff7",
+                "af591b602742afc9",
+                "468ca37e37778fd8",
+                "09cc7afcfb044550"
+            ]
+        ]
+    },
+    {
+        "id": "ec2d5ab5af868ff7",
+        "type": "debug",
+        "z": "64f512d2aa19be79",
+        "name": "Debug_Raw_Speed",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1460,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "34fe67b979887077",
+        "type": "mqtt in",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "topic": "RealTime/RPM",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "b77a72169d07fb3e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 900,
+        "y": 360,
+        "wires": [
+            [
+                "e37816624f08cf92",
+                "23af9bb68b310196"
+            ]
+        ]
+    },
+    {
+        "id": "dd9d060c58f80e19",
+        "type": "mqtt in",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "topic": "RealTime/Time",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "b77a72169d07fb3e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 900,
+        "y": 560,
+        "wires": [
+            [
+                "a1fb8bffcb03ddac",
+                "969eccf385d9b237"
+            ]
+        ]
+    },
+    {
+        "id": "0efad6e54970fef7",
+        "type": "mqtt in",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "topic": "Static/Model",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "b77a72169d07fb3e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 890,
+        "y": 660,
+        "wires": [
+            [
+                "b479416a713c7e1c",
+                "6a4971832277cf3b"
+            ]
+        ]
+    },
+    {
+        "id": "09cc7afcfb044550",
+        "type": "ui_gauge",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "group": "cb76d1f23050da6d",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Speed",
+        "label": "Km/H",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "200",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "100",
+        "seg2": "150",
+        "diff": false,
+        "className": "custom-gauge",
+        "x": 1410,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "2e7dfef860c73cce",
+        "type": "ui_gauge",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "group": "71b577fc41336cf6",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "RPM",
+        "label": "Rev/Min",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "6000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "2000",
+        "seg2": "4000",
+        "diff": false,
+        "className": "custom-gauge",
+        "x": 1490,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "e37816624f08cf92",
+        "type": "debug",
+        "z": "64f512d2aa19be79",
+        "name": "Debug_Raw_RPM",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1450,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "23af9bb68b310196",
+        "type": "function",
+        "z": "64f512d2aa19be79",
+        "name": "Get_Real_RPM",
+        "func": "msg.payload = msg.payload / 4;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 360,
+        "wires": [
+            [
+                "2e7dfef860c73cce",
+                "92cdd828769047cc",
+                "fae3c502e08514d0"
+            ]
+        ]
+    },
+    {
+        "id": "a1fb8bffcb03ddac",
+        "type": "function",
+        "z": "64f512d2aa19be79",
+        "name": "Format_Seconds",
+        "func": "function convertirSegundos(segundos) {\n    let horas = Math.floor(segundos / 3600);\n    let minutos = Math.floor((segundos % 3600) / 60);\n    let segundosRestantes = segundos % 60;\n\n    // Asegura que se muestren dos dígitos para horas, minutos y segundos\n    return [\n        horas.toString().padStart(2, '0'),\n        minutos.toString().padStart(2, '0'),\n        segundosRestantes.toString().padStart(2, '0')\n    ].join(':');\n}\n\nmsg.payload = convertirSegundos(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1170,
+        "y": 580,
+        "wires": [
+            [
+                "5ec3fe766675e075"
+            ]
+        ]
+    },
+    {
+        "id": "5ec3fe766675e075",
+        "type": "ui_text",
+        "z": "64f512d2aa19be79",
+        "group": "899853a7d4a97aef",
+        "order": 2,
+        "width": 12,
+        "height": 2,
+        "name": "",
+        "label": "Time elapsed since engine start:",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "Arial,Arial,Helvetica,sans-serif",
+        "fontSize": "30",
+        "color": "#ffffff",
+        "x": 1490,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "969eccf385d9b237",
+        "type": "debug",
+        "z": "64f512d2aa19be79",
+        "name": "Debug_Raw_Seconds_Passed",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1490,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "b479416a713c7e1c",
+        "type": "ui_text",
+        "z": "64f512d2aa19be79",
+        "group": "899853a7d4a97aef",
+        "order": 1,
+        "width": 12,
+        "height": 1,
+        "name": "",
+        "label": "Model:  ",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "Arial,Arial,Helvetica,sans-serif",
+        "fontSize": "30",
+        "color": "#ffffff",
+        "x": 1410,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "af591b602742afc9",
+        "type": "ui_chart",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "group": "cb76d1f23050da6d",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Speed / Time",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "No data",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "200",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ffffff",
+            "#ff0000",
+            "#ff0000",
+            "#ffa200",
+            "#ffa200",
+            "#ffa200",
+            "#18cc00",
+            "#18cc00",
+            "#18cc00"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1510,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6a4971832277cf3b",
+        "type": "debug",
+        "z": "64f512d2aa19be79",
+        "name": "Debug_Raw_Model",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1450,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "468ca37e37778fd8",
+        "type": "switch",
+        "z": "64f512d2aa19be79",
+        "name": "Dangerous Speed",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "120",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1230,
+        "y": 120,
+        "wires": [
+            [
+                "635380e07f46ad8a",
+                "511d0162a07469d2"
+            ]
+        ]
+    },
+    {
+        "id": "635380e07f46ad8a",
+        "type": "ui_toast",
+        "z": "64f512d2aa19be79",
+        "position": "top right",
+        "displayTime": "10",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "Dangerous Speed",
+        "name": "Dangerous Speed",
+        "x": 1530,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "db909c41e47c12a9",
+        "type": "ui_audio",
+        "z": "64f512d2aa19be79",
+        "name": "Dangerous Speed",
+        "group": "cb76d1f23050da6d",
+        "voice": "Microsoft George - English (United Kingdom)",
+        "always": true,
+        "x": 1830,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "511d0162a07469d2",
+        "type": "function",
+        "z": "64f512d2aa19be79",
+        "name": "Warning Alert",
+        "func": "msg.payload = \"Warning: Speed is too high!\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1580,
+        "y": 120,
+        "wires": [
+            [
+                "db909c41e47c12a9"
+            ]
+        ]
+    },
+    {
+        "id": "1fd75fa6c975afa4",
+        "type": "ui_template",
+        "z": "64f512d2aa19be79",
+        "group": "cb76d1f23050da6d",
+        "name": "Speed RPM Gauge",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n    /* Cambiar el tamaño y estilo del label del gauge con clase \"my-custom-gauge\" */\n    .custom-gauge .nr-dashboard-gauge-title {\n        font-size: 30px !important;\n        /* Cambia el tamaño del texto */\n        color: #ffffff !important;\n        /* Cambia el color del texto */\n        font-weight: bold !important;\n        /* Hace el texto más grueso */\n    }\n</style>\n\n<script>\n    (function() {\n        // Reaplica el estilo cada vez que Node-RED actualiza el gauge\n        var observer = new MutationObserver(function(mutations) {\n            mutations.forEach(function(mutation) {\n                if (mutation.type === 'childList') {\n                    document.querySelectorAll('.custom-gauge .nr-dashboard-gauge-title').forEach(function(el) {\n                        el.style.fontSize = '30px';\n                        el.style.color = '#ffffff';\n                        el.style.fontWeight = 'bold';\n                    });\n                }\n            });\n        });\n\n        // Aplica el observador solo al gauge con la clase \"my-custom-gauge\"\n        var targetNode = document.querySelector('.custom-gauge');\n        if (targetNode) {\n            observer.observe(targetNode, { childList: true, subtree: true });\n        }\n    })();\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "global",
+        "className": "",
+        "x": 910,
+        "y": 220,
+        "wires": [
+            [
+                "09cc7afcfb044550",
+                "2e7dfef860c73cce",
+                "a1fb8bffcb03ddac"
+            ]
+        ]
+    },
+    {
+        "id": "f374ebd2430c0c35",
+        "type": "inject",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 690,
+        "y": 220,
+        "wires": [
+            [
+                "1fd75fa6c975afa4",
+                "d12d7b2cb8790727"
+            ]
+        ]
+    },
+    {
+        "id": "92cdd828769047cc",
+        "type": "switch",
+        "z": "64f512d2aa19be79",
+        "name": "Dangerous RPM",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "4000",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1410,
+        "y": 440,
+        "wires": [
+            [
+                "acc285eddfd9df04",
+                "5ef1295238e46344"
+            ]
+        ]
+    },
+    {
+        "id": "acc285eddfd9df04",
+        "type": "ui_toast",
+        "z": "64f512d2aa19be79",
+        "position": "top left",
+        "displayTime": "10",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "Dangerous RPM",
+        "name": "Dangerous RPM",
+        "x": 1830,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "5ef1295238e46344",
+        "type": "function",
+        "z": "64f512d2aa19be79",
+        "name": "Warning Alert",
+        "func": "msg.payload = \"Warning: Change the gear!\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1600,
+        "y": 480,
+        "wires": [
+            [
+                "c570dc86a507b765"
+            ]
+        ]
+    },
+    {
+        "id": "c570dc86a507b765",
+        "type": "ui_audio",
+        "z": "64f512d2aa19be79",
+        "name": "Dangerous RPM",
+        "group": "71b577fc41336cf6",
+        "voice": "Microsoft George - English (United Kingdom)",
+        "always": "",
+        "x": 1830,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "fae3c502e08514d0",
+        "type": "ui_chart",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "group": "71b577fc41336cf6",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "RPM / Time",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "No data",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "6000",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ffffff",
+            "#ff0000",
+            "#ff0000",
+            "#ffa200",
+            "#ffa200",
+            "#ffa200",
+            "#18cc00",
+            "#18cc00",
+            "#18cc00"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1510,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "44b072d9ff448602",
+        "type": "ui_gauge",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "group": "899853a7d4a97aef",
+        "order": 3,
+        "width": 6,
+        "height": 5,
+        "gtype": "donut",
+        "title": "Engine Load",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "35",
+        "seg2": "70",
+        "diff": false,
+        "className": "custom-donut",
+        "x": 1430,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "fb29d718d8a6fdb2",
+        "type": "mqtt in",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "topic": "RealTime/EngineLoad",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "b77a72169d07fb3e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 920,
+        "y": 760,
+        "wires": [
+            [
+                "d45e19d8be68f9b9",
+                "8c640bb6abfaeb88"
+            ]
+        ]
+    },
+    {
+        "id": "d45e19d8be68f9b9",
+        "type": "function",
+        "z": "64f512d2aa19be79",
+        "name": "Format_Engine_Load",
+        "func": "msg.payload = Math.round((msg.payload / 2.55) * 100) / 100;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 780,
+        "wires": [
+            [
+                "44b072d9ff448602"
+            ]
+        ]
+    },
+    {
+        "id": "8c640bb6abfaeb88",
+        "type": "debug",
+        "z": "64f512d2aa19be79",
+        "name": "Debug_Raw_Engine_load",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1470,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "e808976f34ee2991",
+        "type": "ui_template",
+        "z": "64f512d2aa19be79",
+        "group": "cb76d1f23050da6d",
+        "name": "Engine Load Gauge",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n    /* Cambiar el tamaño y estilo del label del gauge con clase \"my-custom-gauge\" */\n    .custom-donut .nr-dashboard-gauge-title {\n        font-size: 20px !important;\n        /* Cambia el tamaño del texto */\n        color: #ffffff !important;\n        /* Cambia el color del texto */\n        font-weight: bold !important;\n        /* Hace el texto más grueso */\n    }\n</style>\n\n<script>\n    (function() {\n        // Reaplica el estilo cada vez que Node-RED actualiza el gauge\n        var observer = new MutationObserver(function(mutations) {\n            mutations.forEach(function(mutation) {\n                if (mutation.type === 'childList') {\n                    document.querySelectorAll('.custom-donut .nr-dashboard-gauge-title').forEach(function(el) {\n                        el.style.fontSize = '20px';\n                        el.style.color = '#ffffff';\n                        el.style.fontWeight = 'bold';\n                    });\n                }\n            });\n        });\n\n        // Aplica el observador solo al gauge con la clase \"my-custom-gauge\"\n        var targetNode = document.querySelector('.custom-donut');\n        if (targetNode) {\n            observer.observe(targetNode, { childList: true, subtree: true });\n        }\n    })();\n</script>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "global",
+        "className": "",
+        "x": 920,
+        "y": 840,
+        "wires": [
+            [
+                "44b072d9ff448602",
+                "81870d5b348e3383",
+                "376f6fbcfb043fdc"
+            ]
+        ]
+    },
+    {
+        "id": "7b26884238f2b67e",
+        "type": "inject",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 690,
+        "y": 900,
+        "wires": [
+            [
+                "e808976f34ee2991"
+            ]
+        ]
+    },
+    {
+        "id": "81870d5b348e3383",
+        "type": "ui_gauge",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "group": "899853a7d4a97aef",
+        "order": 4,
+        "width": 6,
+        "height": 5,
+        "gtype": "donut",
+        "title": "Exhaust Gas Recirculation",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "50",
+        "seg2": "70",
+        "diff": false,
+        "className": "custom-donut",
+        "x": 1640,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "0ad0f4470eb5bffc",
+        "type": "mqtt in",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "topic": "RealTime/ExhaustGasRecirculation",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "b77a72169d07fb3e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 960,
+        "y": 920,
+        "wires": [
+            [
+                "97cdcf2133790f55",
+                "52725d4ca6725f28"
+            ]
+        ]
+    },
+    {
+        "id": "97cdcf2133790f55",
+        "type": "function",
+        "z": "64f512d2aa19be79",
+        "name": "Format_Exhaust_Gas_Recirculation",
+        "func": "msg.payload = Math.round((msg.payload / 2.55) * 100) / 100;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 880,
+        "wires": [
+            [
+                "81870d5b348e3383"
+            ]
+        ]
+    },
+    {
+        "id": "52725d4ca6725f28",
+        "type": "debug",
+        "z": "64f512d2aa19be79",
+        "name": "Debug_Raw_Exhaust_Gas_Recirculation",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1680,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "6e2d256893aa4e06",
+        "type": "mqtt in",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "topic": "RealTime/AirTemperature",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "b77a72169d07fb3e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 930,
+        "y": 1000,
+        "wires": [
+            [
+                "0a8abb0a17f48ef6",
+                "0758d1943bda2475"
+            ]
+        ]
+    },
+    {
+        "id": "0a8abb0a17f48ef6",
+        "type": "function",
+        "z": "64f512d2aa19be79",
+        "name": "Format_Air_Temperature",
+        "func": "msg.payload = msg.payload - 40;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1270,
+        "y": 1060,
+        "wires": [
+            [
+                "376f6fbcfb043fdc"
+            ]
+        ]
+    },
+    {
+        "id": "376f6fbcfb043fdc",
+        "type": "ui_text",
+        "z": "64f512d2aa19be79",
+        "group": "899853a7d4a97aef",
+        "order": 5,
+        "width": 12,
+        "height": 2,
+        "name": "",
+        "label": "Air Temperature:",
+        "format": "{{msg.payload}} ºC",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "Arial,Arial,Helvetica,sans-serif",
+        "fontSize": "27",
+        "color": "#ffffff",
+        "x": 1540,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "0758d1943bda2475",
+        "type": "debug",
+        "z": "64f512d2aa19be79",
+        "name": "Debug_Raw_Air_temperature",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1490,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "1bbd3272b87e206a",
+        "type": "mqtt in",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "topic": "LastWill",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "b77a72169d07fb3e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 70,
+        "y": 620,
+        "wires": [
+            [
+                "b858775415e90f3b"
+            ]
+        ]
+    },
+    {
+        "id": "b858775415e90f3b",
+        "type": "ui_toast",
+        "z": "64f512d2aa19be79",
+        "position": "dialog",
+        "displayTime": "30",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "Publisher disconected",
+        "name": "Publisher disconected",
+        "x": 300,
+        "y": 620,
+        "wires": [
+            [
+                "d4fff1efb87d2652"
+            ]
+        ]
+    },
+    {
+        "id": "d12d7b2cb8790727",
+        "type": "function",
+        "z": "64f512d2aa19be79",
+        "name": "Reset_Chart",
+        "func": "msg.payload = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1130,
+        "y": 300,
+        "wires": [
+            [
+                "af591b602742afc9",
+                "fae3c502e08514d0"
+            ]
+        ]
+    },
+    {
+        "id": "d4fff1efb87d2652",
+        "type": "function",
+        "z": "64f512d2aa19be79",
+        "name": "Last_Will_Reset",
+        "func": "msg.payload = 0;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 620,
+        "wires": [
+            [
+                "1fd75fa6c975afa4",
+                "e808976f34ee2991"
+            ]
+        ]
+    },
+    {
+        "id": "ab9f5ea85003f856",
+        "type": "mqtt in",
+        "z": "64f512d2aa19be79",
+        "name": "",
+        "topic": "Errors",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "b77a72169d07fb3e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 870,
+        "y": 1120,
+        "wires": [
+            [
+                "62f10b0e4accc063"
+            ]
+        ]
+    },
+    {
+        "id": "62f10b0e4accc063",
+        "type": "function",
+        "z": "64f512d2aa19be79",
+        "name": "Label_Errors",
+        "func": "if (msg.payload == 0) {\n\n    msg.payload = \"Todo correcto, ningun error detectado.\";\n\n} else {\n\n    msg.payload = \"Algo va mal, visita tu mecanico de confianza lo antes posible.\";\n\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1130,
+        "y": 1120,
+        "wires": [
+            [
+                "7a618e8199ec9921"
+            ]
+        ]
+    },
+    {
+        "id": "7a618e8199ec9921",
+        "type": "ui_text",
+        "z": "64f512d2aa19be79",
+        "group": "899853a7d4a97aef",
+        "order": 7,
+        "width": 12,
+        "height": 2,
+        "name": "Errors Msg Printed",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "Arial,Arial,Helvetica,sans-serif",
+        "fontSize": "24",
+        "color": "#ffffff",
+        "x": 1510,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "3bac97b3f6862f2a",
+        "type": "ui_text",
+        "z": "64f512d2aa19be79",
+        "group": "899853a7d4a97aef",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "Errors Label",
+        "label": "Errors:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": true,
+        "font": "Arial,Arial,Helvetica,sans-serif",
+        "fontSize": "27",
+        "color": "#ffffff",
+        "x": 1490,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "b77a72169d07fb3e",
+        "type": "mqtt-broker",
+        "name": "Mosquitto broker",
+        "broker": "79.116.32.228",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "cb76d1f23050da6d",
+        "type": "ui_group",
+        "name": "Real Time Speed",
+        "tab": "90c8dcf5229b5e0e",
+        "order": 3,
+        "disp": false,
+        "width": 11,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "71b577fc41336cf6",
+        "type": "ui_group",
+        "name": "Real Time RPM",
+        "tab": "90c8dcf5229b5e0e",
+        "order": 1,
+        "disp": false,
+        "width": 11,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "899853a7d4a97aef",
+        "type": "ui_group",
+        "name": "Center",
+        "tab": "90c8dcf5229b5e0e",
+        "order": 2,
+        "disp": false,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "90c8dcf5229b5e0e",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
